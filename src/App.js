@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Navbar from "./components/Navbar/Navbar";
+import logo from "./assets/logo.png";
 
-function App() {
+const App = () => {
+  const handleToggleSidebar = () => {
+    console.log("Sidebar toggle clicked");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar
+        logo={logo}
+        username="John Doe"
+        userRole="Administrator"
+        profilePicture="https://via.placeholder.com/40"
+        onToggleSidebar={handleToggleSidebar}
+      />
     </div>
   );
-}
+};
 
 export default App;

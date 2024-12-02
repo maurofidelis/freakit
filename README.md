@@ -1,70 +1,162 @@
-# Getting Started with Create React App
+Segue um modelo de documentação para a **Navbar** em um arquivo `README.md`. O documento é claro, conciso e segue as boas práticas de redação técnica.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+# Navbar Component
 
-In the project directory, you can run:
+A **Navbar** é um componente React responsivo e reutilizável, projetado para servir como layout padrão em projetos que utilizam uma interface com sidebar. O componente inclui funcionalidades como um menu hambúrguer, exibição do nome e perfil do usuário, além de suporte para uma logo.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 **Recursos**
+- Menu hambúrguer para expandir/recolher uma sidebar.
+- Exibição do nome e função do usuário.
+- Foto de perfil do usuário (com imagem padrão).
+- Suporte para logotipo da aplicação.
+- Totalmente responsiva.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 📂 **Estrutura do Projeto**
+```plaintext
+src/
+  components/
+    Navbar/
+      Navbar.jsx
+      Navbar.styles.js
+      Navbar.module.css
+  assets/
+    logo.png
+App.js
+README.md
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🔧 **Instalação**
+### Pré-requisitos
+- **Node.js** (versão 16 ou superior recomendada).
+- Gerenciador de pacotes (npm ou yarn).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Passos para Instalação
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/navbar-component.git
+   cd navbar-component
+   ```
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+3. Inicie o servidor de desenvolvimento:
+   ```bash
+   npm start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧩 **Uso**
 
-### `npm run eject`
+### **Importação e Renderização**
+No arquivo onde deseja usar a Navbar (ex.: `App.js`):
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```jsx
+import React from "react";
+import Navbar from "./components/Navbar/Navbar";
+import logo from "./assets/logo.png";
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+function App() {
+  const handleSidebarToggle = () => {
+    console.log("Sidebar toggle acionado!");
+  };
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  return (
+    <div>
+      <Navbar
+        logo={logo}
+        username="John Doe"
+        userRole="Administrator"
+        profilePicture="https://via.placeholder.com/40"
+        onToggleSidebar={handleSidebarToggle}
+      />
+    </div>
+  );
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+export default App;
+```
 
-## Learn More
+### **Propriedades (Props)**
+| Propriedade       | Tipo        | Obrigatório | Descrição                                                        | Exemplo                        |
+|--------------------|-------------|-------------|------------------------------------------------------------------|--------------------------------|
+| `logo`            | `string`    | Sim         | Caminho para a imagem da logo.                                   | `"./assets/logo.png"`         |
+| `username`        | `string`    | Sim         | Nome do usuário.                                                 | `"John Doe"`                  |
+| `userRole`        | `string`    | Sim         | Função ou papel do usuário.                                      | `"Administrator"`             |
+| `profilePicture`  | `string`    | Não         | URL ou caminho para a imagem de perfil do usuário.               | `"https://via.placeholder.com/40"` |
+| `onToggleSidebar` | `function`  | Sim         | Função chamada ao clicar no botão de menu hambúrguer.            | `() => console.log('Toggle')` |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🎨 **Estilos**
 
-### Code Splitting
+### **CSS Modules**
+O componente utiliza **CSS Modules** para garantir o isolamento dos estilos:
+- Arquivo: `Navbar.module.css`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### **Styled Components**
+Alguns estilos são definidos com **Styled Components** para facilitar a personalização dinâmica:
+- Arquivo: `Navbar.styles.js`
 
-### Analyzing the Bundle Size
+### **Responsividade**
+Os elementos são responsivos para diferentes tamanhos de tela:
+- A função e o nome do usuário são ocultados em telas menores que 768px.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🛠 **Manutenção e Extensibilidade**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. **Adicionar notificações:**
+   Insira um ícone de notificação no lado direito, próximo à foto de perfil.
+2. **Integrar a Sidebar:**
+   Combine o estado `onToggleSidebar` com um componente de Sidebar.
+3. **Tema Escuro/Claro:**
+   Adicione um botão para alternar entre temas.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🧪 **Testes**
+- Execute a aplicação no navegador.
+- Verifique:
+  - Responsividade em diferentes tamanhos de tela.
+  - Funcionamento do botão de menu.
+  - Renderização correta dos dados passados via props.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🖼 **Exemplo Visual**
 
-### `npm run build` fails to minify
+### Desktop
+![Exemplo Desktop](https://via.placeholder.com/800x400)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Mobile
+![Exemplo Mobile](https://via.placeholder.com/400x800)
+
+---
+
+## 📄 **Licença**
+Este componente é licenciado sob a [MIT License](LICENSE).
+
+---
+
+## 👨‍💻 **Contribuições**
+Contribuições são bem-vindas! Para sugerir melhorias:
+1. Faça um fork do repositório.
+2. Crie uma nova branch:
+   ```bash
+   git checkout -b feature/nova-funcionalidade
+   ```
+3. Envie um Pull Request.
+
+---
+
+Com isso, o arquivo `README.md` estará completo e pronto para acompanhar o projeto da Navbar! 🚀

@@ -1,0 +1,29 @@
+.leftSection {
+    display: flex;
+    align-items: center;
+  }
+  
+  .hamburgerMenu {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+  
+  .hamburgerMenu:focus {
+    outline: 2px solid white;
+  }
+  
+  .rightSection {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profileImg {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+  
