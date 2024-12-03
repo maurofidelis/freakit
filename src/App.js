@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import logo from "./assets/logo.png";
 import { FaHome, FaUser, FaCog } from "react-icons/fa";
 import MainContent from "./components/MainContent/MainContent";
+import UserForm  from "./components/Forms/UserForm";
 
 const App = () => {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -39,8 +40,7 @@ const App = () => {
 
         {/* Conteúdo Principal */}
         <div className="content-container">
-          <h1>Bem-vindo ao Dashboard</h1>
-          <p>Este é um exemplo de conteúdo dentro de um container</p>
+          <UserForm />
         </div>
       </MainContent>      
     </div>

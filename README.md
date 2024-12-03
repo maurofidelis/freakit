@@ -2,11 +2,18 @@ Inspiração: https://themewagon.github.io/purple-react/dashboard
 
 ## TO DO:
 
-- [ ] Colocar Conteúdo principal com a core #f2edf3
 - [ ] Transformar o breadcrumbs em componente -> Breadcrumbs dinâmicos
 - [ ] Adicionar footer
 
-- [ ] Menu items a partir de um arquivo config
+-- FormGenerator
+- [ ] Enpoints dinâmicos: argumento para especificar o endpoint do backend
+- [ ]
+
+-- Arquivo Config
+- [ ] Menu items 
+- [ ] Cores  
+- [ ] Logo 
+- [ ] Nome da Aplicação
 
 - [ ] Verificar responsividade
 

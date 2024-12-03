@@ -1,0 +1,24 @@
+[
+    {
+      "name": "name",
+      "label": "Nome",
+      "type": "text",
+      "placeholder": "Digite seu nome",
+      "required": true
+    },
+    {
+      "name": "email",
+      "label": "E-mail",
+      "type": "email",
+      "placeholder": "Digite seu e-mail",
+      "required": true
+    },
+    {
+      "name": "age",
+      "label": "Idade",
+      "type": "number",
+      "placeholder": "Digite sua idade",
+      "required": true
+    }
+  ]
+  
