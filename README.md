@@ -2,12 +2,22 @@ Inspiração: https://themewagon.github.io/purple-react/dashboard
 
 ## TO DO:
 
-- [ ] Transformar o breadcrumbs em componente -> Breadcrumbs dinâmicos
-- [ ] Adicionar footer
-
 -- FormGenerator
 - [ ] Enpoints dinâmicos: argumento para especificar o endpoint do backend
-- [ ]
+- [ ] Acrescentar validações no front
+- [ ] Organizar os forms em pastas dentro do Form. Por exemplo, o UserForm gera uma pasta UserForm dentro de src/components/Forms
+
+-- IndexGenerator 
+-- [ ] Geração de página de index automática, contendo uma tabela que vai se conectar com uma rota get do FastAPI que retorna uma lista de registro. O fronte deve conter paginação
+-- [ ] Endopoint dinâmico 
+-- [ ] Botão de Create 
+-- [ ] A tabela deve ter um campo de ação com as opções de visualizar, deletar e editar 
+
+-- ViewGenerator 
+-- [ ] Geração de um modal com a visualização dos elementos deve ser 
+
+-- EditGenerator
+-- [ ] Geração de um formulário que traz os dados de uma rota get do FastAPI e os deixa disponível para edição 
 
 -- Arquivo Config
 - [ ] Menu items 
@@ -16,6 +26,12 @@ Inspiração: https://themewagon.github.io/purple-react/dashboard
 - [ ] Nome da Aplicação
 
 - [ ] Verificar responsividade
+
+-- Melhorias 
+
+- [ ] Transformar o breadcrumbs em componente -> Breadcrumbs dinâmicos
+- [ ] Adicionar footer
+- [ ] P/ SES-MG -> adicionar uma navbar institucional
 
 # Navbar Component
 

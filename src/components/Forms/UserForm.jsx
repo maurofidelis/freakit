@@ -1,5 +1,12 @@
 
 import React, { useState } from "react";
+import {
+  FormContainer,
+  FormHeader,
+  FormField,
+  SubmitButton,
+  Message,
+} from "./UserForm.styles";
 
 const UserForm = () => {
   const [formValues, setFormValues] = useState({});
@@ -42,11 +49,11 @@ const UserForm = () => {
   };
 
   return (
-    <div>
-      <h2>Preencha o Formulário</h2>
+    <FormContainer>
+      <FormHeader>Preencha o Formulário</FormHeader>
       <form onSubmit={handleSubmit}>
         
-        <div>
+        <FormField>
           <label htmlFor="name">Nome:</label>
           <input
             type="text"
@@ -57,9 +64,9 @@ const UserForm = () => {
             onChange={handleChange}
             required={true}
           />
-        </div>
+        </FormField>
 
-        <div>
+        <FormField>
           <label htmlFor="email">E-mail:</label>
           <input
             type="email"
@@ -70,9 +77,9 @@ const UserForm = () => {
             onChange={handleChange}
             required={true}
           />
-        </div>
+        </FormField>
 
-        <div>
+        <FormField>
           <label htmlFor="age">Idade:</label>
           <input
             type="number"
@@ -83,14 +90,14 @@ const UserForm = () => {
             onChange={handleChange}
             required={true}
           />
-        </div>
-        <button type="submit" disabled={isSubmitting}>
+        </FormField>
+        <SubmitButton type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Enviando..." : "Enviar"}
-        </button>
+        </SubmitButton>
       </form>
-      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-    </div>
+      {successMessage && <Message>{successMessage}</Message>}
+      {errorMessage && <Message isError>{errorMessage}</Message>}
+    </FormContainer>
   );
 };
 

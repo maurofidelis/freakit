@@ -8,7 +8,7 @@ const generateFormComponent = (componentName, fields) => {
   const fieldsCode = fields
     .map((field) => {
       return `
-        <div>
+        <FormField>
           <label htmlFor="${field.name}">${field.label}:</label>
           <input
             type="${field.type}"
@@ -19,12 +19,19 @@ const generateFormComponent = (componentName, fields) => {
             onChange={handleChange}
             required={${field.required || false}}
           />
-        </div>`;
+        </FormField>`;
     })
     .join("\n");
 
   return `
 import React, { useState } from "react";
+import {
+  FormContainer,
+  FormHeader,
+  FormField,
+  SubmitButton,
+  Message,
+} from "./${componentName}.styles";
 
 const ${componentName} = () => {
   const [formValues, setFormValues] = useState({});
@@ -67,17 +74,17 @@ const ${componentName} = () => {
   };
 
   return (
-    <div>
-      <h2>Preencha o Formulário</h2>
+    <FormContainer>
+      <FormHeader>Preencha o Formulário</FormHeader>
       <form onSubmit={handleSubmit}>
         ${fieldsCode}
-        <button type="submit" disabled={isSubmitting}>
+        <SubmitButton type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Enviando..." : "Enviar"}
-        </button>
+        </SubmitButton>
       </form>
-      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-    </div>
+      {successMessage && <Message>{successMessage}</Message>}
+      {errorMessage && <Message isError>{errorMessage}</Message>}
+    </FormContainer>
   );
 };
 
@@ -85,14 +92,107 @@ export default ${componentName};
 `;
 };
 
-// Função para criar o arquivo do componente
-const createComponentFile = (componentName, fields) => {
-  const componentCode = generateFormComponent(componentName, fields);
-  const componentPath = path.join(process.cwd(), 'src', 'components', 'Forms', `${componentName}.jsx`);
+// Template do arquivo de estilos
+const generateStylesFile = () => {
+  return `
+import styled from "styled-components";
 
+export const FormContainer = styled.div\`
+\`;
+
+export const FormHeader = styled.h2\`
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+  color: #333333;
+  font-weight: bold;
+\`;
+
+export const FormField = styled.div\`
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333333;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: #1abc9c;
+      box-shadow: 0 0 5px rgba(26, 188, 156, 0.4);
+      outline: none;
+    }
+
+    &:hover {
+      border-color: #16a085;
+    }
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input::placeholder {
+    color: #aaa;
+    font-size: 14px;
+  }
+\`;
+
+export const SubmitButton = styled.button\`
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #1abc9c;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #16a085;
+  }
+
+  &:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+  }
+\`;
+
+export const Message = styled.p\`
+  font-size: 14px;
+  margin-top: 20px;
+  color: \${(props) => (props.isError ? "red" : "green")};
+  text-align: center;
+\`;
+`;
+};
+
+// Função para criar os arquivos
+const createFiles = (componentName, fields) => {
+  const componentCode = generateFormComponent(componentName, fields);
+  const stylesCode = generateStylesFile();
+
+  const componentPath = path.join(process.cwd(), 'src', 'components', 'Forms', `${componentName}.jsx`);
+  const stylesPath = path.join(process.cwd(), 'src', 'components', 'Forms', `${componentName}.styles.js`);
 
   fs.writeFileSync(componentPath, componentCode, "utf8");
-  console.log(`Componente ${componentName}.jsx gerado com sucesso em ${componentPath}`);
+  fs.writeFileSync(stylesPath, stylesCode, "utf8");
+
+  console.log(`Componente ${componentName}.jsx e estilos ${componentName}.styles.js gerados com sucesso!`);
 };
 
 // Função principal
@@ -112,7 +212,7 @@ const main = () => {
   }
 
   const fields = JSON.parse(fs.readFileSync(fieldsPath, "utf8"));
-  createComponentFile(componentName, fields);
+  createFiles(componentName, fields);
 };
 
 main();
