@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import logo from "./assets/logo.png";
 import { FaHome, FaUser, FaCog } from "react-icons/fa";
+import MainContent from "./components/MainContent/MainContent";
 
 const App = () => {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -30,6 +31,18 @@ const App = () => {
         toggleSidebar={toggleSidebar}
         menuItems={menuItems}
       />
+      <MainContent isSidebarExpanded={isSidebarExpanded}>
+        {/* Breadcrumbs */}
+        <div className="breadcrumbs">
+          Home / Dashboard
+        </div> 
+
+        {/* Conteúdo Principal */}
+        <div className="content-container">
+          <h1>Bem-vindo ao Dashboard</h1>
+          <p>Este é um exemplo de conteúdo dentro de um container</p>
+        </div>
+      </MainContent>      
     </div>
   );
 };
