@@ -3,62 +3,61 @@ import styled from "styled-components";
 export const SidebarContainer = styled.div`
   position: fixed;
   top: 0;
-  left: ${(props) => (props.isOpen ? "0" : "-260px")}; /* Transição para abrir/fechar */
-  width: 260px;
+  left: 0;
+  width: ${(props) => (props.isExpanded ? "240px" : "80px")}; /* Largura dinâmica */
   height: 100%;
-  background-color: white; /* Cor branca */
-  box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1); /* Sombra semelhante à Navbar */
-  color: #2c3e50;
-  transition: left 0.3s ease; /* Animação suave */
+  background-color: #2c3e50;
+  color: white;
+  transition: width 0.3s ease; /* Transição suave */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 `;
 
-export const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  display: ${(props) => (props.isOpen ? "block" : "none")}; /* Exibir apenas se a sidebar estiver aberta */
-`;
-
-export const SidebarContent = styled.div`
-  padding: 20px;
+export const SidebarHeader = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #3f4b59;
+  h1 {
+    font-size: ${(props) => (props.isExpanded ? "20px" : "18px")};
+    margin: 0;
+  }
 `;
 
-export const CloseButton = styled.button`
-  align-self: flex-end;
+export const ToggleButton = styled.button`
   background: none;
   border: none;
-  font-size: 24px;
-  color: #2c3e50;
+  color: white;
   cursor: pointer;
+  font-size: 16px;
 `;
 
-export const Menu = styled.ul`
+export const SidebarMenu = styled.ul`
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  flex: 1;
 `;
 
-export const MenuItem = styled.li`
+export const SidebarMenuItem = styled.li`
   margin: 10px 0;
-  font-size: 18px;
-
   a {
-    text-decoration: none;
-    color: #2c3e50;
     display: flex;
     align-items: center;
-    gap: 10px;
-
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s;
+    .icon {
+      margin-right: ${(props) => (props.isExpanded ? "10px" : "0")}; /* Espaço entre ícone e texto */
+      font-size: 20px;
+    }
     &:hover {
-      color: #1abc9c; /* Cor de destaque ao passar o mouse */
+      background-color: #1abc9c;
     }
   }
 `;

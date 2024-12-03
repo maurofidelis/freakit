@@ -1,24 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FaBars } from "react-icons/fa"; 
-import { NavbarContainer, Logo, UserProfile, UserInfo, HamburgerMenu } from "./Navbar.styles";
+import { NavbarContainer, UserProfile, UserInfo } from "./Navbar.styles";
 import styles from "./Navbar.module.css";
 
 const Navbar = ({ logo, username, userRole, profilePicture, onToggleSidebar, isSidebarOpen }) => {
     return (
         <NavbarContainer>
-            { /* Seção da esquerda: Menu Hamburguer + Logo */ }
-            <div className={styles.leftSection}>
-                <HamburgerMenu 
-                    onClick={onToggleSidebar}
-                    aria-label="Alternar a Barra Lateral"
-                    isSidebarOpen={isSidebarOpen} 
-                >
-                    <FaBars />
-                </HamburgerMenu>
-                <Logo src={logo} alt="Logo do Sistema" />
-            </div>
-
             { /* Seção da direita: Informações do Usuário */ }
             <div className={styles.rightSection}>
                 <UserInfo>

@@ -5,27 +5,16 @@ import logo from "./assets/logo.png";
 import { FaHome, FaUser, FaCog } from "react-icons/fa";
 
 const App = () => {
-
-  // useState para Sidebar
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); 
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
   const menuItems = [
     { label: "Home", link: "/", icon: <FaHome /> },
     { label: "Perfil", link: "/profile", icon: <FaUser /> },
-    { label: "Settings", link: "/settings", icon: <FaCog />},
-    {
-      label: "Configurações",
-      link: "/settings",
-      icon: <FaCog />,
-      submenu: [
-        { label: "Opção 1", link: "/settings/option1" },
-        { label: "Opção 2", link: "/settings/option2" },
-      ],
-    },
+    { label: "Configurações", link: "/settings", icon: <FaCog /> },
   ];
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-  
+  const toggleSidebar = () => setIsSidebarExpanded(!isSidebarExpanded);
+
   return (
     <div>
       <Navbar
@@ -34,12 +23,12 @@ const App = () => {
         userRole="Administrator"
         profilePicture="https://via.placeholder.com/40"
         onToggleSidebar={toggleSidebar}
-        isSidebarOpen={isSidebarOpen}
+        isSidebarOpen={isSidebarExpanded}
       />
-      <Sidebar 
-        isOpen={isSidebarOpen} 
-        onClose={() => setIsSidebarOpen(false)} 
-        menuItems={menuItems} 
+      <Sidebar
+        isExpanded={isSidebarExpanded}
+        toggleSidebar={toggleSidebar}
+        menuItems={menuItems}
       />
     </div>
   );

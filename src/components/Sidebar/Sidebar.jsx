@@ -1,54 +1,49 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { IoMdClose } from "react-icons/io";
+import { FaHome, FaUser, FaCog } from "react-icons/fa";
 import {
   SidebarContainer,
-  Overlay,
-  SidebarContent,
-  CloseButton,
-  Menu,
-  MenuItem,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
+  ToggleButton,
 } from "./Sidebar.styles";
 
-const Sidebar = ({ isOpen, onClose, menuItems }) => {
-  return (
-    <>
-      {/* Container da Sidebar */}
-      <SidebarContainer isOpen={isOpen}>
-        <SidebarContent>
-          {/* Botão de Fechar */}
-          <CloseButton onClick={onClose} aria-label="Fechar Sidebar">
-            <IoMdClose />
-          </CloseButton>
+const Sidebar = ({ isExpanded, toggleSidebar }) => {
+  const menuItems = [
+    { label: "Home", link: "/", icon: <FaHome /> },
+    { label: "Perfil", link: "/profile", icon: <FaUser /> },
+    { label: "Configurações", link: "/settings", icon: <FaCog /> },
+  ];
 
-          {/* Menu */}
-          <Menu>
-            {menuItems.map((item, index) => (
-              <MenuItem key={index}>
-                <a href={item.link}>
-                  {item.icon && <span>{item.icon}</span>}
-                  {item.label}
-                </a>
-              </MenuItem>
-            ))}
-          </Menu>
-        </SidebarContent>
-      </SidebarContainer>
-    </>
+  return (
+    <SidebarContainer isExpanded={isExpanded}>
+      {/* Cabeçalho da Sidebar */}
+      <SidebarHeader>
+        <h1>{isExpanded ? "Menu" : "M"}</h1>
+        <ToggleButton onClick={toggleSidebar}>
+          {isExpanded ? "←" : "→"}
+        </ToggleButton>
+      </SidebarHeader>
+
+      {/* Menu de Navegação */}
+      <SidebarMenu>
+        {menuItems.map((item, index) => (
+          <SidebarMenuItem key={index} isExpanded={isExpanded}>
+            <a href={item.link}>
+              <span className="icon">{item.icon}</span>
+              {isExpanded && <span className="label">{item.label}</span>}
+            </a>
+          </SidebarMenuItem>
+        ))}
+      </SidebarMenu>
+    </SidebarContainer>
   );
 };
 
-// PropTypes para validação
 Sidebar.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  menuItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-      icon: PropTypes.node,
-    })
-  ).isRequired,
+  isExpanded: PropTypes.bool.isRequired, // Indica se está expandida
+  toggleSidebar: PropTypes.func.isRequired, // Alterna o estado
 };
 
 export default Sidebar;
