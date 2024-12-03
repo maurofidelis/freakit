@@ -1,37 +1,5 @@
 Inspiração: https://themewagon.github.io/purple-react/dashboard
 
-## TO DO:
-
--- FormGenerator
-- [ ] Organizar os forms em pastas dentro do Form. Por exemplo, o UserForm gera uma pasta UserForm dentro de src/components/Forms
-- [ ] Acrescentar o caminho no App.js -> entender como são geradas novas páginas
-
--- IndexGenerator 
--- [ ] Geração de página de index automática, contendo uma tabela que vai se conectar com uma rota get do FastAPI que retorna uma lista de registro. O fronte deve conter paginação
--- [ ] Endopoint dinâmico 
--- [ ] Botão de Create 
--- [ ] A tabela deve ter um campo de ação com as opções de visualizar, deletar e editar 
-
--- ViewGenerator 
--- [ ] Geração de um modal com a visualização dos elementos deve ser 
-
--- EditGenerator
--- [ ] Geração de um formulário que traz os dados de uma rota get do FastAPI e os deixa disponível para edição 
-
--- Arquivo Config
-- [ ] Menu items 
-- [ ] Cores  
-- [ ] Logo 
-- [ ] Nome da Aplicação
-
-- [ ] Verificar responsividade
-
--- Melhorias 
-
-- [ ] Transformar o breadcrumbs em componente -> Breadcrumbs dinâmicos
-- [ ] Adicionar footer
-- [ ] P/ SES-MG -> adicionar uma navbar institucional
-
 # Navbar Component
 
 A **Navbar** é um componente React responsivo e reutilizável, projetado para servir como layout padrão em projetos que utilizam uma interface com sidebar. O componente inclui funcionalidades como um menu hambúrguer, exibição do nome e perfil do usuário, além de suporte para uma logo.

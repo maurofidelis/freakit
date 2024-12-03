@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FaHome, FaUser, FaCog } from "react-icons/fa";
 import {
@@ -30,10 +31,10 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
       <SidebarMenu>
         {menuItems.map((item, index) => (
           <SidebarMenuItem key={index} isExpanded={isExpanded}>
-            <a href={item.link}>
+            <Link to={item.link}>
               <span className="icon">{item.icon}</span>
               {isExpanded && <span className="label">{item.label}</span>}
-            </a>
+            </Link>
           </SidebarMenuItem>
         ))}
       </SidebarMenu>
