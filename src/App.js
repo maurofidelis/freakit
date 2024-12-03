@@ -13,10 +13,18 @@ const App = () => {
     { label: "Home", link: "/", icon: <FaHome /> },
     { label: "Perfil", link: "/profile", icon: <FaUser /> },
     { label: "Settings", link: "/settings", icon: <FaCog />},
+    {
+      label: "Configurações",
+      link: "/settings",
+      icon: <FaCog />,
+      submenu: [
+        { label: "Opção 1", link: "/settings/option1" },
+        { label: "Opção 2", link: "/settings/option2" },
+      ],
+    },
   ];
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-  const closeSidebar = () => setIsSidebarOpen(false);
   
   return (
     <div>
@@ -26,8 +34,13 @@ const App = () => {
         userRole="Administrator"
         profilePicture="https://via.placeholder.com/40"
         onToggleSidebar={toggleSidebar}
+        isSidebarOpen={isSidebarOpen}
       />
-      <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} menuItems={menuItems} />
+      <Sidebar 
+        isOpen={isSidebarOpen} 
+        onClose={() => setIsSidebarOpen(false)} 
+        menuItems={menuItems} 
+      />
     </div>
   );
 };

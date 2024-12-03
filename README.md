@@ -1,3 +1,14 @@
+Inspiração: https://themewagon.github.io/purple-react/dashboard
+
+## TO DO:
+- [ ] Hamburguer que acompanha a sidebar -> parcialmente implementado
+- [ ] Logo no topo da sidebar, com o nome da aplicação estilizada ao lado 
+- [ ] Quando a sidebar for retraída, so aparece a logo e o nome sume 
+- [ ] Quando a sidebar for retraída, fica aparecendo os ícones 
+- [ ] Adicionar footer
+
+- [ ] Verificar responsividade
+
 # Navbar Component
 
 A **Navbar** é um componente React responsivo e reutilizável, projetado para servir como layout padrão em projetos que utilizam uma interface com sidebar. O componente inclui funcionalidades como um menu hambúrguer, exibição do nome e perfil do usuário, além de suporte para uma logo.

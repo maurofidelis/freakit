@@ -1,21 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FaBars } from "react-icons/fa"; 
-import { NavbarContainer, Logo, UserProfile, UserInfo } from "./Navbar.styles";
+import { NavbarContainer, Logo, UserProfile, UserInfo, HamburgerMenu } from "./Navbar.styles";
 import styles from "./Navbar.module.css";
 
-const Navbar = ({ logo, username, userRole, profilePicture, onToggleSidebar }) => {
+const Navbar = ({ logo, username, userRole, profilePicture, onToggleSidebar, isSidebarOpen }) => {
     return (
         <NavbarContainer>
             { /* Seção da esquerda: Menu Hamburguer + Logo */ }
             <div className={styles.leftSection}>
-                <button
-                    className={styles.hamburguerMenu}
+                <HamburgerMenu 
                     onClick={onToggleSidebar}
                     aria-label="Alternar a Barra Lateral"
+                    isSidebarOpen={isSidebarOpen} 
                 >
                     <FaBars />
-                </button>
+                </HamburgerMenu>
                 <Logo src={logo} alt="Logo do Sistema" />
             </div>
 
@@ -44,6 +44,7 @@ Navbar.propTypes = {
     userRole: PropTypes.string.isRequired,
     profilePicture: PropTypes.string,
     onToggleSidebar: PropTypes.func.isRequired,
+    isSidebarOpen: PropTypes.bool.isRequired
 };
 
 Navbar.defaultProps = {
