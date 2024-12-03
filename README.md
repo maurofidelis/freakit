@@ -3,9 +3,9 @@ Inspiração: https://themewagon.github.io/purple-react/dashboard
 ## TO DO:
 
 -- FormGenerator
-- [ ] Acrescentar validações no front
 - [ ] Enpoints dinâmicos: argumento para especificar o endpoint do backend
 - [ ] Organizar os forms em pastas dentro do Form. Por exemplo, o UserForm gera uma pasta UserForm dentro de src/components/Forms
+- [ ] Acrescentar o caminho no App.js -> entender como são geradas novas páginas
 
 -- IndexGenerator 
 -- [ ] Geração de página de index automática, contendo uma tabela que vai se conectar com uma rota get do FastAPI que retorna uma lista de registro. O fronte deve conter paginação

@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 // Template do componente de formulário
-const generateFormComponent = (componentName, fields) => {
+const generateFormComponent = (componentName, fields, endpoint) => {
   const fieldsCode = fields
     .map((field) => {
       // Adicionar validações baseadas nas regras
@@ -95,7 +95,7 @@ const ${componentName} = () => {
     setErrorMessage("");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/${componentName.toLowerCase()}", {
+      const response = await fetch("${endpoint}", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -137,7 +137,7 @@ export default ${componentName};
 `;
 };
 
-// Template do arquivo de estilos
+// Template do arquivo de estilos 
 const generateStylesFile = () => {
   return `
 import styled from "styled-components";
@@ -223,8 +223,8 @@ export const ValidationError = styled.span\`
 };
 
 // Função para criar os arquivos
-const createFiles = (componentName, fields) => {
-  const componentCode = generateFormComponent(componentName, fields);
+const createFiles = (componentName, fields, endpoint) => {
+  const componentCode = generateFormComponent(componentName, fields, endpoint);
   const stylesCode = generateStylesFile();
 
   const componentPath = path.join(process.cwd(), 'src', 'components', 'Forms', `${componentName}.jsx`);
@@ -239,12 +239,12 @@ const createFiles = (componentName, fields) => {
 // Função principal
 const main = () => {
   const args = process.argv.slice(2);
-  if (args.length < 2) {
-    console.error("Uso: node generate-form.js <NomeDoComponente> <ArquivoComCampos>");
+  if (args.length < 3) {
+    console.error("Uso: node generate-form.js <NomeDoComponente> <ArquivoComCampos> <Endpoint>");
     process.exit(1);
   }
 
-  const [componentName, fieldsFile] = args;
+  const [componentName, fieldsFile, endpoint] = args;
 
   const fieldsPath = path.join(process.cwd(), fieldsFile);
   if (!fs.existsSync(fieldsPath)) {
@@ -253,7 +253,7 @@ const main = () => {
   }
 
   const fields = JSON.parse(fs.readFileSync(fieldsPath, "utf8"));
-  createFiles(componentName, fields);
+  createFiles(componentName, fields, endpoint);
 };
 
 main();
