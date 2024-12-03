@@ -1,7 +1,7 @@
 Inspiração: https://themewagon.github.io/purple-react/dashboard
 
 ## TO DO:
-- [ ] Hamburguer que acompanha a sidebar -> parcialmente implementado
+
 - [ ] Logo no topo da sidebar, com o nome da aplicação estilizada ao lado 
 - [ ] Quando a sidebar for retraída, so aparece a logo e o nome sume 
 - [ ] Quando a sidebar for retraída, fica aparecendo os ícones 
