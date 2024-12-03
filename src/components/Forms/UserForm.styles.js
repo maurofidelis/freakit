@@ -2,7 +2,6 @@
 import styled from "styled-components";
 
 export const FormContainer = styled.div`
-  
 `;
 
 export const FormHeader = styled.h2`
@@ -42,17 +41,6 @@ export const FormField = styled.div`
       border-color: #16a085;
     }
   }
-
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input::placeholder {
-    color: #aaa;
-    font-size: 14px;
-  }
 `;
 
 export const SubmitButton = styled.button`
@@ -82,4 +70,11 @@ export const Message = styled.p`
   margin-top: 20px;
   color: ${(props) => (props.isError ? "red" : "green")};
   text-align: center;
+`;
+
+export const ValidationError = styled.span`
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
 `;

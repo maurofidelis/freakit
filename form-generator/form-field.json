@@ -4,21 +4,36 @@
       "label": "Nome",
       "type": "text",
       "placeholder": "Digite seu nome",
-      "required": true
+      "required": true,
+      "validationRules": {
+        "minLength": 3,
+        "maxLength": 50,
+        "pattern": "^[a-zA-Z ]+$",
+        "errorMessage": "O nome deve conter apenas letras e ter entre 3 e 50 caracteres."
+      }
     },
     {
       "name": "email",
       "label": "E-mail",
       "type": "email",
       "placeholder": "Digite seu e-mail",
-      "required": true
+      "required": true,
+      "validationRules": {
+        "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+        "errorMessage": "Por favor, insira um e-mail válido."
+      }
     },
     {
       "name": "age",
       "label": "Idade",
       "type": "number",
       "placeholder": "Digite sua idade",
-      "required": true
+      "required": true,
+      "validationRules": {
+        "min": 18,
+        "max": 100,
+        "errorMessage": "A idade deve estar entre 18 e 100 anos."
+      }
     }
-  ]
+]
   

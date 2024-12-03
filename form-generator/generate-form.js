@@ -7,6 +7,31 @@ const path = require("path");
 const generateFormComponent = (componentName, fields) => {
   const fieldsCode = fields
     .map((field) => {
+      // Adicionar validações baseadas nas regras
+      const validations = [];
+      if (field.validationRules) {
+        if (field.validationRules.minLength) {
+          validations.push(`value.length >= ${field.validationRules.minLength}`);
+        }
+        if (field.validationRules.maxLength) {
+          validations.push(`value.length <= ${field.validationRules.maxLength}`);
+        }
+        if (field.validationRules.min !== undefined) {
+          validations.push(`Number(value) >= ${field.validationRules.min}`);
+        }
+        if (field.validationRules.max !== undefined) {
+          validations.push(`Number(value) <= ${field.validationRules.max}`);
+        }
+        if (field.validationRules.pattern) {
+          validations.push(`new RegExp("${field.validationRules.pattern}").test(value)`);
+        }
+      }
+
+      const validationCheck = validations.length
+        ? `const isValid = ${validations.join(" && ")};`
+        : "const isValid = true;";
+      const errorMessage = field.validationRules?.errorMessage || "Valor inválido.";
+
       return `
         <FormField>
           <label htmlFor="${field.name}">${field.label}:</label>
@@ -16,9 +41,21 @@ const generateFormComponent = (componentName, fields) => {
             name="${field.name}"
             placeholder="${field.placeholder || ""}"
             value={formValues.${field.name} || ""}
-            onChange={handleChange}
+            onChange={(e) => {
+              const value = e.target.value;
+              ${validationCheck}
+              if (!isValid) {
+                setValidationErrors((prev) => ({ ...prev, ${field.name}: "${errorMessage}" }));
+              } else {
+                setValidationErrors((prev) => ({ ...prev, ${field.name}: "" }));
+              }
+              handleChange(e);
+            }}
             required={${field.required || false}}
           />
+          {validationErrors.${field.name} && (
+            <ValidationError>{validationErrors.${field.name}}</ValidationError>
+          )}
         </FormField>`;
     })
     .join("\n");
@@ -31,10 +68,12 @@ import {
   FormField,
   SubmitButton,
   Message,
+  ValidationError,
 } from "./${componentName}.styles";
 
 const ${componentName} = () => {
   const [formValues, setFormValues] = useState({});
+  const [validationErrors, setValidationErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -46,6 +85,11 @@ const ${componentName} = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const hasErrors = Object.values(validationErrors).some((err) => err);
+    if (hasErrors) {
+      setErrorMessage("Por favor, corrija os erros antes de enviar.");
+      return;
+    }
     setIsSubmitting(true);
     setSuccessMessage("");
     setErrorMessage("");
@@ -62,6 +106,7 @@ const ${componentName} = () => {
       if (response.ok) {
         setSuccessMessage("Formulário enviado com sucesso!");
         setFormValues({});
+        setValidationErrors({});
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.detail || "Erro ao enviar o formulário.");
@@ -137,17 +182,6 @@ export const FormField = styled.div\`
       border-color: #16a085;
     }
   }
-
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input::placeholder {
-    color: #aaa;
-    font-size: 14px;
-  }
 \`;
 
 export const SubmitButton = styled.button\`
@@ -177,6 +211,13 @@ export const Message = styled.p\`
   margin-top: 20px;
   color: \${(props) => (props.isError ? "red" : "green")};
   text-align: center;
+\`;
+
+export const ValidationError = styled.span\`
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
 \`;
 `;
 };
