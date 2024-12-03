@@ -2,9 +2,7 @@ Inspiração: https://themewagon.github.io/purple-react/dashboard
 
 ## TO DO:
 
-- [ ] Logo no topo da sidebar, com o nome da aplicação estilizada ao lado 
-- [ ] Quando a sidebar for retraída, so aparece a logo e o nome sume 
-- [ ] Quando a sidebar for retraída, fica aparecendo os ícones 
+- [ ] Colocar Conteúdo principal com a core #f2edf3
 - [ ] Adicionar footer
 
 - [ ] Verificar responsividade
