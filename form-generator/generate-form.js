@@ -7,7 +7,6 @@ const path = require("path");
 const generateFormComponent = (componentName, fields, endpoint) => {
   const fieldsCode = fields
     .map((field) => {
-      // Adicionar validações baseadas nas regras
       const validations = [];
       if (field.validationRules) {
         if (field.validationRules.minLength) {
@@ -23,14 +22,52 @@ const generateFormComponent = (componentName, fields, endpoint) => {
           validations.push(`Number(value) <= ${field.validationRules.max}`);
         }
         if (field.validationRules.pattern) {
-          validations.push(`new RegExp("${field.validationRules.pattern}").test(value)`);
+          validations.push(
+            `new RegExp("${field.validationRules.pattern}").test(value)`
+          );
         }
       }
 
       const validationCheck = validations.length
         ? `const isValid = ${validations.join(" && ")};`
         : "const isValid = true;";
-      const errorMessage = field.validationRules?.errorMessage || "Valor inválido.";
+      const errorMessage =
+        field.validationRules?.errorMessage || "Valor inválido.";
+
+      if (field.type === "select") {
+        const optionsCode = field.options
+          .map(
+            (option) =>
+              `<option value="${option.value}">${option.label}</option>`
+          )
+          .join("\n");
+
+        return `
+        <FormField>
+          <label htmlFor="${field.name}">${field.label}:</label>
+          <select
+            id="${field.name}"
+            name="${field.name}"
+            value={formValues.${field.name} || ""}
+            onChange={(e) => {
+              const value = e.target.value;
+              ${validationCheck}
+              if (!isValid) {
+                setValidationErrors((prev) => ({ ...prev, ${field.name}: "${errorMessage}" }));
+              } else {
+                setValidationErrors((prev) => ({ ...prev, ${field.name}: "" }));
+              }
+              handleChange(e);
+            }}
+          >
+            <option value="">Selecione...</option>
+            ${optionsCode}
+          </select>
+          {validationErrors.${field.name} && (
+            <ValidationError>{validationErrors.${field.name}}</ValidationError>
+          )}
+        </FormField>`;
+      }
 
       return `
         <FormField>
@@ -163,7 +200,8 @@ export const FormField = styled.div\`
     color: #333333;
   }
 
-  input {
+  input,
+  select {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid #ccc;
@@ -181,6 +219,14 @@ export const FormField = styled.div\`
     &:hover {
       border-color: #16a085;
     }
+  }
+
+  select {
+    appearance: none; /* Remove a seta padrão do select */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231ABC9C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
   }
 \`;
 
@@ -227,20 +273,36 @@ const createFiles = (componentName, fields, endpoint) => {
   const componentCode = generateFormComponent(componentName, fields, endpoint);
   const stylesCode = generateStylesFile();
 
-  const componentPath = path.join(process.cwd(), 'src', 'components', 'Forms', `${componentName}.jsx`);
-  const stylesPath = path.join(process.cwd(), 'src', 'components', 'Forms', `${componentName}.styles.js`);
+  const componentPath = path.join(
+    process.cwd(),
+    "src",
+    "components",
+    "Forms",
+    `${componentName}.jsx`
+  );
+  const stylesPath = path.join(
+    process.cwd(),
+    "src",
+    "components",
+    "Forms",
+    `${componentName}.styles.js`
+  );
 
   fs.writeFileSync(componentPath, componentCode, "utf8");
   fs.writeFileSync(stylesPath, stylesCode, "utf8");
 
-  console.log(`Componente ${componentName}.jsx e estilos ${componentName}.styles.js gerados com sucesso!`);
+  console.log(
+    `Componente ${componentName}.jsx e estilos ${componentName}.styles.js gerados com sucesso!`
+  );
 };
 
 // Função principal
 const main = () => {
   const args = process.argv.slice(2);
   if (args.length < 3) {
-    console.error("Uso: node generate-form.js <NomeDoComponente> <ArquivoComCampos> <Endpoint>");
+    console.error(
+      "Uso: node generate-form.js <NomeDoComponente> <ArquivoComCampos> <Endpoint>"
+    );
     process.exit(1);
   }
 

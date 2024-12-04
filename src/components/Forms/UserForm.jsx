@@ -33,7 +33,7 @@ const UserForm = () => {
     setErrorMessage("");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/userform", {
+      const response = await fetch("/api/endpoint", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,27 +62,52 @@ const UserForm = () => {
       <form onSubmit={handleSubmit}>
         
         <FormField>
-          <label htmlFor="name">Nome:</label>
+          <label htmlFor="username">Nome de Usuário:</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            placeholder="Digite seu nome"
-            value={formValues.name || ""}
+            id="username"
+            name="username"
+            placeholder=""
+            value={formValues.username || ""}
             onChange={(e) => {
               const value = e.target.value;
-              const isValid = value.length >= 3 && value.length <= 50 && new RegExp("^[a-zA-Z ]+$").test(value);
+              const isValid = true;
               if (!isValid) {
-                setValidationErrors((prev) => ({ ...prev, name: "O nome deve conter apenas letras e ter entre 3 e 50 caracteres." }));
+                setValidationErrors((prev) => ({ ...prev, username: "Valor inválido." }));
               } else {
-                setValidationErrors((prev) => ({ ...prev, name: "" }));
+                setValidationErrors((prev) => ({ ...prev, username: "" }));
               }
               handleChange(e);
             }}
-            required={true}
+            required={false}
           />
-          {validationErrors.name && (
-            <ValidationError>{validationErrors.name}</ValidationError>
+          {validationErrors.username && (
+            <ValidationError>{validationErrors.username}</ValidationError>
+          )}
+        </FormField>
+
+        <FormField>
+          <label htmlFor="password">Senha:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder=""
+            value={formValues.password || ""}
+            onChange={(e) => {
+              const value = e.target.value;
+              const isValid = true;
+              if (!isValid) {
+                setValidationErrors((prev) => ({ ...prev, password: "Valor inválido." }));
+              } else {
+                setValidationErrors((prev) => ({ ...prev, password: "" }));
+              }
+              handleChange(e);
+            }}
+            required={false}
+          />
+          {validationErrors.password && (
+            <ValidationError>{validationErrors.password}</ValidationError>
           )}
         </FormField>
 
@@ -92,19 +117,19 @@ const UserForm = () => {
             type="email"
             id="email"
             name="email"
-            placeholder="Digite seu e-mail"
+            placeholder=""
             value={formValues.email || ""}
             onChange={(e) => {
               const value = e.target.value;
-              const isValid = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$").test(value);
+              const isValid = true;
               if (!isValid) {
-                setValidationErrors((prev) => ({ ...prev, email: "Por favor, insira um e-mail válido." }));
+                setValidationErrors((prev) => ({ ...prev, email: "Valor inválido." }));
               } else {
                 setValidationErrors((prev) => ({ ...prev, email: "" }));
               }
               handleChange(e);
             }}
-            required={true}
+            required={false}
           />
           {validationErrors.email && (
             <ValidationError>{validationErrors.email}</ValidationError>
@@ -112,27 +137,29 @@ const UserForm = () => {
         </FormField>
 
         <FormField>
-          <label htmlFor="age">Idade:</label>
-          <input
-            type="number"
-            id="age"
-            name="age"
-            placeholder="Digite sua idade"
-            value={formValues.age || ""}
+          <label htmlFor="country">País:</label>
+          <select
+            id="country"
+            name="country"
+            value={formValues.country || ""}
             onChange={(e) => {
               const value = e.target.value;
-              const isValid = Number(value) >= 18 && Number(value) <= 100;
+              const isValid = true;
               if (!isValid) {
-                setValidationErrors((prev) => ({ ...prev, age: "A idade deve estar entre 18 e 100 anos." }));
+                setValidationErrors((prev) => ({ ...prev, country: "Valor inválido." }));
               } else {
-                setValidationErrors((prev) => ({ ...prev, age: "" }));
+                setValidationErrors((prev) => ({ ...prev, country: "" }));
               }
               handleChange(e);
             }}
-            required={true}
-          />
-          {validationErrors.age && (
-            <ValidationError>{validationErrors.age}</ValidationError>
+          >
+            <option value="">Selecione...</option>
+            <option value="br">Brasil</option>
+<option value="us">Estados Unidos</option>
+<option value="uk">Reino Unido</option>
+          </select>
+          {validationErrors.country && (
+            <ValidationError>{validationErrors.country}</ValidationError>
           )}
         </FormField>
         <SubmitButton type="submit" disabled={isSubmitting}>
