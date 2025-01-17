@@ -22,6 +22,9 @@ src/
       MainContent.styles.js
     Forms/
       UserForm.jsx
+    Buttons/
+      SaveButton.jsx 
+      SaveButton.style.js
   pages/
     HomePage.jsx
     ProfilePage.jsx
@@ -119,6 +122,22 @@ src/
 
 ---
 
+## Componentes 
+
+### Componentes de Botão (Buttoms)
+
+Todos os componentes de botão estão em `src\components\Buttons\`
+
+- Botão de Salvar
+- Botão de Atualizar 
+
+### Componentes de Botão de Tabela (Table Buttoms)
+
+- Botão de Editar 
+- Botão de Visualizar 
+- Botão de Deletar 
+---
+
 ## 🛠 Formulários Dinâmicos
 
 O formulário é gerado automaticamente a partir de um arquivo JSON e integrado ao backend.
@@ -133,17 +152,80 @@ O formulário é gerado automaticamente a partir de um arquivo JSON e integrado 
 ]
 ```
 
-### Comando para Gerar Formulário
+### Comando para Gerar um Componete de Formulário
 
 Use o seguinte comando para criar um novo formulário:
 
 ```bash
-npm run generate-form -- --fields ./path-to-json.json --endpoint /api/submit
+npm run generate-form <NomeDoComponente> <ArquivoComCampos> <Endpoint>
 ```
 
 Este comando gera um componente de formulário com validações frontend e integração com o backend.
 
 ---
+
+## Criar Páginas de CRUD Completo 
+
+O freakit também cria toda a estrutura de CRUD automaticamente a partir de um arquivo JSON que define os dados e integrados a endpoints do backend. 
+
+O CRUD criado contém a seguinte estrutura:
+
+- Nome do CRUD 
+-- IndexPage.jsx -> contendo uma tabela com os campos definidos e botões de ação de editar, visualizar e deletar nas linhas das tabelas, deve conter, também, um botão de Criar <Nome do CRUD>
+--- O botão de Visualizar abre um modal contendo os campos definidos bloqueados
+--- O botão de deletar abre um pop-up com a mensagem de confirmação para deletar o registro 
+-- CreatePage.jsx -> contendo um Formulário com os campos definidos no Json e um botão de salvar que irá enviar os dados para uma rota create
+-- EditPage.jsx -> contendo um Formulário com os campos definidos e um botão de editar para enviar as alterações para uma rota update 
+
+-- 
+
+
+```plaintext
+src/
+  components/
+    Navbar/
+      Navbar.jsx
+      Navbar.styles.js
+      Navbar.module.css
+    Sidebar/
+      Sidebar.jsx
+      Sidebar.styles.js
+      Sidebar.module.css
+    MainContent/
+      MainContent.jsx
+      MainContent.styles.js
+    Forms/
+      UserForm.jsx
+  pages/
+    HomePage.jsx
+    ProfilePage.jsx
+    SettingsPage.jsx
+  assets/
+    logo.png
+  App.js
+  README.md
+```
+
+
+
+### Exemplo de JSON 
+
+```json 
+[
+  { "name": "username", "label": "Nome de Usuário", "type": "text", "validation": { "required": true, "minLength": 3 } },
+  { "name": "password", "label": "Senha", "type": "password", "validation": { "required": true, "minLength": 8 } },
+  { "name": "email", "label": "E-mail", "type": "email", "validation": { "required": true } }
+]
+```
+
+### Comando para Gerar as páginas de CRUD 
+
+Use o seguinte comando para criar as páginas de CRUD 
+
+```bash
+npm run generate-crud 
+```
+
 
 ## 🎨 Estilização
 
