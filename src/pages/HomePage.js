@@ -4,6 +4,7 @@ import UpdateButton from "../components/Buttons/UpdateButton";
 import TableActionButtons from "../components/Buttons/TableActionButtons";
 import CustomTable from "../components/Tables/CustomTable";
 import CustomModal from "../components/Modals/CustomModal";
+import InputField from "../components/FormField/InputField";
 
 const columns = [
   { field: 'id', headerName: 'ID' },
@@ -45,6 +46,7 @@ const HomePage = () => {
       >
         <p>Este é o conteúdo do modal.</p>
       </CustomModal>
+      <InputField />
     </div>
   );
 };

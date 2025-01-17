@@ -6,10 +6,6 @@ import MainContent from "./components/MainContent/MainContent";
 import logo from "./assets/logo.png";
 import { FaHome, FaUser, FaCog } from "react-icons/fa";
 
-import UserIndexPage from "./pages/User/IndexPage";
-import UserCreatePage from "./pages/User/CreatePage";
-import UserEditPage from "./pages/User/EditPage";
-
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
@@ -43,10 +39,6 @@ const App = () => {
         />
         <MainContent isSidebarExpanded={isSidebarExpanded}>
           <Routes>
-            <Route path="/user" element={<UserIndexPage />} />
-            <Route path="/user/create" element={<UserCreatePage />} />
-            <Route path="/user/edit/:id" element={<UserEditPage />} />
-
             {/* Rotas para renderizar páginas */}
             <Route path="/" element={<HomePage />} />
             <Route path="/profile" element={<ProfilePage />} />
