@@ -128,15 +128,67 @@ src/
 
 Todos os componentes de botão estão em `src\components\Buttons\`
 
-- Botão de Salvar
-- Botão de Atualizar 
+1. **Botão de Salvar (__SaveButton__)** 
+É o botão utilizado para salvar informações ou interações do usuário 
 
-### Componentes de Botão de Tabela (Table Buttoms)
+**Propriedades:**
+| Propriedade  | Tipo       | Padrão   | Descrição                                    |
+|--------------|------------|----------|--------------------------------------------|
+| `label`      | `string`   | `Salvar`  | Texto exibido no botão.                    |
+| `onClick`    | `function` | Obrigatório | Função executada ao clicar no botão.       |
+| `isLoading`  | `boolean`  | `false`   | Exibe animação de carregamento.            |
+| `disabled`   | `boolean`  | `false`   | Desativa o botão.                          |
 
-- Botão de Editar 
-- Botão de Visualizar 
-- Botão de Deletar 
----
+**Exemplo de Uso**
+```jsx
+<SaveButton
+  label="Salvar Dados"
+  onClick={handleSave}
+  isLoading={false}
+  disabled={false}
+/>
+```
+2. **Botão de Atualizar (__UpdateButton__)**
+Botão utilizado para atualizar informações em formulários ou interfaces
+
+**Propriedades:**
+| Propriedade  | Tipo       | Padrão     | Descrição                                    |
+|--------------|------------|------------|--------------------------------------------|
+| `label`      | `string`   | `Atualizar` | Texto exibido no botão.                    |
+| `onClick`    | `function` | Obrigatório | Função executada ao clicar no botão.       |
+| `isLoading`  | `boolean`  | `false`     | Exibe animação de carregamento.            |
+| `disabled`   | `boolean`  | `false`     | Desativa o botão.                          |
+
+**Exemplo de Uso:**
+```jsx
+<UpdateButton
+  label="Atualizar Dados"
+  onClick={handleUpdate}
+  isLoading={true}
+  disabled={false}
+/>
+```
+
+3. **Botões de Ação de Tabela**
+Conjunto de botões exibidos na coluna de ação das tabelas para interações como visualizar, editar e deletar itens. 
+
+**Propriedades:**
+| Propriedade  | Tipo       | Padrão   | Descrição                                    |
+|--------------|------------|----------|--------------------------------------------|
+| `onView`     | `function` | Obrigatório | Função executada ao clicar no botão de visualizar. |
+| `onEdit`     | `function` | Obrigatório | Função executada ao clicar no botão de editar.     |
+| `onDelete`   | `function` | Obrigatório | Função executada ao clicar no botão de deletar.    |
+| `isDisabled` | `boolean`  | `false`   | Desativa todos os botões do componente.    |
+
+**Exemplo de Uso:**
+```jsx
+<TableActionButtons
+  onView={() => console.log('Visualizar item')}
+  onEdit={() => console.log('Editar item')}
+  onDelete={() => console.log('Deletar item')}
+  isDisabled={false}
+/>
+```
 
 ## 🛠 Formulários Dinâmicos
 
