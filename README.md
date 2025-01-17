@@ -9,6 +9,18 @@ Este projeto é uma **interface de usuário modular e responsiva**, construída 
 ```plaintext
 src/
   components/
+    Buttons/
+      SaveButton.jsx 
+      SaveButton.style.js
+      TableActionButton.jsx
+      TableActionButton.styles.js
+      UpdateButton.jsx
+      UpdateButton.styles.js
+    Forms/
+      UserForm.jsx
+    MainContent/
+      MainContent.jsx
+      MainContent.styles.js
     Navbar/
       Navbar.jsx
       Navbar.styles.js
@@ -17,14 +29,10 @@ src/
       Sidebar.jsx
       Sidebar.styles.js
       Sidebar.module.css
-    MainContent/
-      MainContent.jsx
-      MainContent.styles.js
-    Forms/
-      UserForm.jsx
-    Buttons/
-      SaveButton.jsx 
-      SaveButton.style.js
+    Tables/
+      CustomTable.jsx
+      CustomTable.styles.js
+
   pages/
     HomePage.jsx
     ProfilePage.jsx
@@ -188,6 +196,61 @@ Conjunto de botões exibidos na coluna de ação das tabelas para interações c
   onDelete={() => console.log('Deletar item')}
   isDisabled={false}
 />
+```
+
+### Componentes de Tabela (__CustomTable__)
+O componente **Custom Table** foi criado para renderizar tabelas dinâmicas e reutilizáveis. Ele permite a personalização de colunas, dados e ações específicas para cada linha
+
+**Propriedades**
+| Propriedade     | Tipo       | Padrão     | Descrição                                                                 |
+|-----------------|------------|------------|---------------------------------------------------------------------------|
+| `columns`       | `array`    | Obrigatório | Define as colunas da tabela (campos e cabeçalhos).                        |
+| `data`          | `array`    | Obrigatório | Dados da tabela, onde cada item representa uma linha.                     |
+| `renderActions` | `function` | `null`      | Função para renderizar botões de ação personalizados na última coluna.    |
+
+
+**Estrutura da Propriedade `columns`**
+A propriedade `columns` deve ser um array de objetos com os seguintes campos: 
+| Campo       | Tipo     | Descrição                                    |
+|-------------|----------|----------------------------------------------|
+| `field`     | `string` | Nome da propriedade do objeto nos dados.     |
+| `headerName`| `string` | Texto exibido como cabeçalho da coluna.      |
+
+**Estrutura da Propriedade `data`**
+A propriedade `data`deve ser um array de objetos. Cada objeto representa uma linha da tabela, onde as chaves correspondem aos valores definidos em `field`
+
+**Exemplo de uso**
+```jsx
+import React from 'react';
+import CustomTable from './components/Tables/CustomTable';
+import TableActionButtons from './components/Buttons/TableActionButtons';
+
+const columns = [
+  { field: 'id', headerName: 'ID' },
+  { field: 'name', headerName: 'Nome' },
+  { field: 'email', headerName: 'E-mail' },
+];
+
+const data = [
+  { id: 1, name: 'João Silva', email: 'joao.silva@example.com' },
+  { id: 2, name: 'Maria Oliveira', email: 'maria.oliveira@example.com' },
+];
+
+const App = () => (
+  <CustomTable
+    columns={columns}
+    data={data}
+    renderActions={(row) => (
+      <TableActionButtons
+        onView={() => console.log('Visualizar:', row)}
+        onEdit={() => console.log('Editar:', row)}
+        onDelete={() => console.log('Deletar:', row)}
+      />
+    )}
+  />
+);
+
+export default App;
 ```
 
 ## 🛠 Formulários Dinâmicos
