@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import SaveButton from "../components/Buttons/SaveButton";
 import UpdateButton from "../components/Buttons/UpdateButton";
 import TableActionButtons from "../components/Buttons/TableActionButtons";
 import CustomTable from "../components/Tables/CustomTable";
+import CustomModal from "../components/Modals/CustomModal";
 
 const columns = [
   { field: 'id', headerName: 'ID' },
@@ -16,6 +17,8 @@ const data = [
 ];
 
 const HomePage = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
   return (
     <div>
       <h1>Página Inicial</h1>
@@ -33,6 +36,15 @@ const HomePage = () => {
           />
         )}     
       />
+      <button onClick={() => setModalOpen(true)}>Abrir Modal</button>
+      <CustomModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Título do Modal"
+        footer={<button onClick={() => setModalOpen(false)}>Fechar</button>}
+      >
+        <p>Este é o conteúdo do modal.</p>
+      </CustomModal>
     </div>
   );
 };

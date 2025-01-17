@@ -21,6 +21,9 @@ src/
     MainContent/
       MainContent.jsx
       MainContent.styles.js
+    Modals
+      CustomModal.jsx
+      CustomModal.styles.js
     Navbar/
       Navbar.jsx
       Navbar.styles.js
@@ -32,7 +35,6 @@ src/
     Tables/
       CustomTable.jsx
       CustomTable.styles.js
-
   pages/
     HomePage.jsx
     ProfilePage.jsx
@@ -132,7 +134,7 @@ src/
 
 ## Componentes 
 
-### Componentes de Botão (Buttoms)
+### Componentes de Botão (__Buttoms__)
 
 Todos os componentes de botão estão em `src\components\Buttons\`
 
@@ -249,6 +251,46 @@ const App = () => (
     )}
   />
 );
+
+export default App;
+```
+
+
+
+### Componentes de Modal 
+O componente **CustomModal** é utilizado para exibir conteúdos dinâmicos em um modal centralizado, com suporte a cabeçalhos, rodapés e funcionalidades de fechamento. 
+
+**Propriedades**
+| Propriedade  | Tipo         | Padrão     | Descrição                                                         |
+|--------------|--------------|------------|-------------------------------------------------------------------|
+| `isOpen`     | `boolean`    | Obrigatório | Controla a visibilidade do modal.                                |
+| `onClose`    | `function`   | Obrigatório | Função executada ao fechar o modal.                              |
+| `title`      | `string`     | `''`        | Texto exibido no cabeçalho do modal.                             |
+| `children`   | `node`       | `null`      | Conteúdo principal exibido no corpo do modal.                    |
+| `footer`     | `node`       | `null`      | Conteúdo opcional exibido no rodapé do modal.                    |
+
+**Exemplo de Uso**
+```jsx
+import React, { useState } from 'react';
+import CustomModal from './components/Modals/CustomModal';
+
+const App = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setModalOpen(true)}>Abrir Modal</button>
+      <CustomModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Título do Modal"
+        footer={<button onClick={() => setModalOpen(false)}>Fechar</button>}
+      >
+        <p>Este é o conteúdo do modal.</p>
+      </CustomModal>
+    </div>
+  );
+};
 
 export default App;
 ```
