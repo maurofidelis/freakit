@@ -6,7 +6,6 @@ import MainContent from "./components/MainContent/MainContent";
 import logo from "./assets/logo.png";
 import { FaHome, FaUser, FaCog } from "react-icons/fa";
 
-// Páginas
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";

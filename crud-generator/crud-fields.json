@@ -1,0 +1,13 @@
+{
+    "entityName": "User",
+    "fields": [
+      { "field": "id", "headerName": "ID" },
+      { "field": "name", "headerName": "Nome" },
+      { "field": "email", "headerName": "E-mail" }
+    ],
+    "routes": {
+      "create": "/api/user/create",
+      "update": "/api/user/update",
+      "delete": "/api/user/delete"
+    }
+  }
