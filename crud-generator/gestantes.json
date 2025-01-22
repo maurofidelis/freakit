@@ -1,0 +1,14 @@
+{
+    "entityName": "Gestante",
+    "fields": [
+      { "field": "cpf", "headerName": "CPF" },
+      { "field": "nome", "headerName": "Nome da Gestante" },
+      { "field": "cns", "headerName": "CNS da Gestante" },
+      { "field": "municipio_cod_ibge", "headerName": "Município"}
+    ],
+    "routes": {
+      "create": "/api/user/create",
+      "update": "/api/user/update",
+      "delete": "/api/user/delete"
+    }
+  }

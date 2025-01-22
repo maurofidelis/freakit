@@ -10,6 +10,11 @@ import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
 
+// Gestante Pages
+import GestanteCreatePage from "./pages/Gestante/CreatePage";
+import GestanteEditPage from "./pages/Gestante/EditPage";
+import GestanteIndexPage from "./pages/Gestante/IndexPage";
+
 const App = () => {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
@@ -39,6 +44,11 @@ const App = () => {
         />
         <MainContent isSidebarExpanded={isSidebarExpanded}>
           <Routes>
+            {/* Rotas para renderizar gestantes */}
+            <Route path="/gestante" element={<GestanteIndexPage />} />
+            <Route path="/gestante/create" element={<GestanteCreatePage />} />
+            <Route path="/gestante/edit/:id" element={<GestanteEditPage />} />
+
             {/* Rotas para renderizar páginas */}
             <Route path="/" element={<HomePage />} />
             <Route path="/profile" element={<ProfilePage />} />
