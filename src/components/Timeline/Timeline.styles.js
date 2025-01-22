@@ -66,3 +66,17 @@ export const ConsultationList = styled.div`
     margin-bottom: 8px;
   }
 `;
+
+export const EntregaButton = styled.button`
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #218838;
+  }
+`;

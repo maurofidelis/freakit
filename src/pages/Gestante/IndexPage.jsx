@@ -80,6 +80,11 @@ const GestanteIndexPage = () => {
     }
   };
 
+  const handleRegisterKit = (gestacaoId) => {
+    alert(`Entrega do kit registrada para a gestação ID: ${gestacaoId}`);
+    // Adicione lógica para enviar dados ao servidor ou atualizar estado.
+  };
+
   return (
     <div>
       <SaveButton 
@@ -110,7 +115,7 @@ const GestanteIndexPage = () => {
             <p><strong>CNS:</strong> {viewItem.cns}</p>
             <p><strong>Município (IBGE):</strong> {viewItem.municipio_cod_ibge}</p>
 
-            <Timeline events={viewItem.historico} />
+            <Timeline events={viewItem.historico} onRegisterKit={handleRegisterKit} />
           </div>
         )}
       </CustomModal>

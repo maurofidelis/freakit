@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { TimelineContainer, TimelineItem, TimelinePoint, DetailButton, ConsultationList } from './Timeline.styles';
+import { TimelineContainer, TimelineItem, TimelinePoint, DetailButton, ConsultationList, EntregaButton } from './Timeline.styles';
 
 const Timeline = ({ events }) => {
   const [expandedEvent, setExpandedEvent] = useState(null);
@@ -21,10 +21,14 @@ const Timeline = ({ events }) => {
                 <p><strong>Data:</strong> {evento.data}</p>
                 <p><strong>Status Gravidez:</strong> {evento.status_gravidez}</p>
                 <p><strong>Status Entrega de Kit:</strong> {evento.status_kit}</p>
-                <DetailButton onClick={() => toggleAccordion(evento.id)}>
-                  {expandedEvent === evento.id ? 'Ocultar Detalhes' : 'Ver Detalhes'}
-                </DetailButton>
-
+                <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+                  <DetailButton onClick={() => toggleAccordion(evento.id)}>
+                      {expandedEvent === evento.id ? 'Ocultar Detalhes' : 'Ver Detalhes'}
+                  </DetailButton>
+                  <EntregaButton onClick={() => onRegisterKit(evento.id)}>
+                    Registrar Entrega de Kit
+                  </EntregaButton>
+                </div>
                 {/* Histórico de consultas (acordeão) */}
                 {expandedEvent === evento.id && (
                   <ConsultationList>
@@ -67,7 +71,7 @@ Timeline.propTypes = {
       ),
     })
   ).isRequired,
-  onDetail: PropTypes.func.isRequired,
+  onRegisterKit: PropTypes.func.isRequired,
 };
 
 export default Timeline;
